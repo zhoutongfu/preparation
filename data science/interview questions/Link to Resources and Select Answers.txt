@@ -1,0 +1,16 @@
+Hey there, aspiring data scientists!
+
+Thank you again for purchasing 120 Data Science Interview Questions! These past few months, we have been hard at work compiling a resource with helpful material and select answers to the questions at: datascienceinterview.quora.com
+
+In addition, we've also been compiling links to other resources that can help you prepare for a career in data science.
+
+You don't need a Quora account to view the answers; you can simply append "?share=1" (without the quotation marks) at the end of any Quora URL to view it without being prompted to sign up.
+
+(However, we do recommend signing up for a Quora account so that you can follow the blog, and be notified when new answers are posted!)
+
+Again, the link to see the answers & resources is: https://datascienceinterview.quora.com
+
+As this is a work in progress, you can request to prioritize certain questions and give general feedback via this short Google Form: https://docs.google.com/forms/d/1vN7lo8V8yTJobZndL6_tzcDo-dMcTmTps05VZZTHQf4/viewform
+
+Onwards and upwards, 
+William, Carl, Max and Henry

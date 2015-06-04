@@ -1,0 +1,164 @@
+public static String compressString(String str){
+	StringBuilder newStr = new StringBuilder();
+	int length = 1;
+	for (int i = 0; i < str.length(); i ++){
+		if (i == 0)
+			newStr.append(str.charAt(i));
+		else if (str.charAt(i)==str.charAt(i-1)){
+			length ++;
+			if ( i == str.length()-1)
+				newStr.append(length);
+		}
+		else{
+			if (length > 1)
+				newStr.append(length);
+			newStr.append(str.charAt(i));
+			length = 1;
+		} 
+	}
+	return newStr.length() < str.length()?newStr.toString():str;
+}
+
+
+
+
+
+
+
+
+
+public static String compressString2(String str){
+	if (compressSize >= str.length())
+		return str;
+	StringBuilder newStr = new StringBuilder();
+	char last = str.charAt(0);
+	int length = 1;
+	for (int i = 1; i < str.length(); i ++){
+		if (last == str.charAt(i))
+			length ++;
+		else{
+			newStr.append(last);
+			newStr.append(length);
+			length = 1;
+			last = str.charAt(i);
+		}
+	}
+	newStr.append(last);
+	newStr.append(length);
+	return newStr.toString();
+}
+
+
+public static int compressSize(String str){
+	if (str == null || str.isEmpty())
+		return 0;
+	if (str.length() == 1)
+		return 2;
+	int uniqueChar = 1;
+	for (int i =1; i < str.length(); i ++){
+		if (str.charAt(i) != str.charAt(i-1))
+			uniqueChar ++;
+	}
+	if (str.charAt(str.length()-2) != str.charAt(str.length()-1))
+		uniqueChar ++;
+
+	return uniqueChar*2;
+}
+
+
+public static int[][] rotateMatrix(int[][] matrix){
+	int N = matrix.length;
+	int[][] rotate = new int[N][N];
+	for (int i = 0; i < N ; i ++){
+		for (int j = 0; j < N; j ++){
+			rotate[j][N-1-i] = matrix[i][j]
+		}
+	}
+
+	return rotate;
+
+}
+
+
+
+
+
+public static int[][] setZero(int[][] matrix){
+	int x = matrix.length;
+	int y = matrix[0].length;
+	boolean[] rowIndex = new boolean[x];
+	boolean[] colIndex = new boolean[y];
+
+	for (int i =0; i < x; i ++){
+		for (int j = 0; j < y; j++){
+			if (matrix[i][j] == 0){
+				if (!rowIndex[i]){
+					i++;
+					j = 0;
+					continue;
+				}
+
+				if (!colIndex[j]){
+					j++;
+					continue;
+				}
+
+				// set its column and row to be 0
+				for (int k = 0; k < y; k ++)
+					matrix[i][k] = 0;
+				for (int k = 0; k < x; k ++)
+					matrix[k][j] = 0;
+				rowIndex[i] = True;
+				colIndex[j] = True;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

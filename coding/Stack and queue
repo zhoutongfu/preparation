@@ -1,0 +1,93 @@
+	public static class Node<T>{
+		Node<T> next = null;
+		T data;
+		public Node(T d){
+			this.data=d;
+		}
+	}
+	
+	public static class Stack<T>{
+		Node<T> top = null;
+		
+		// default empty constructor
+		/*
+		 * public Stack(){
+		 * }
+		 */
+		
+		public T pop() {
+			if (top != null){
+				T item = top.data;
+				top = top.next;
+				return item;
+			}
+			return null;
+		}
+
+		public void push(T item){
+			Node<T> t = new Node<T>(item);
+			t.next = top;
+			top = t;
+		}
+		
+		public T peek(){
+			return top.data;
+		}
+	}
+	
+	
+	// create stack recording the min value 
+	// assume that a super class called Stack and a class called Node already exist
+	public static class NodeWithMin{
+		// NodeWithMin next = null;
+		int data;
+		int min;
+		
+		public NodeWithMin(int data, int min){
+			this.data = data;
+			this.min = min;
+		}
+	}
+
+
+	public static class MyStack extends Stack<NodeWithMin>{
+		public void push(int data){
+			int minimum = Math.min(data,this.minValue());
+			super.push(new NodeWithMin(data,minimum));
+		}
+
+		public int minValue(){
+			if (this.top != null){
+				return super.peek().min;
+			}
+			return Integer.MAX_VALUE;
+		}
+		
+
+		public int peekValue(){
+			return super.peek().data;
+		}
+
+	}
+
+	public static class MyStack2 extends Stack<Integer>{
+		MyStack s2 = new MyStack();
+
+		public void push(int value){
+			if ( value < s2.peek()){
+				s2.push(value);
+			}
+			super.push(value);
+		}
+
+		public int minValue(){
+			return s2.peek();
+		}
+
+		@Override
+		public Integer pop(){
+			if (this.peek() == s2.peek())
+				s2.pop();
+			return super.pop();
+		}
+	}

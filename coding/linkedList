@@ -1,0 +1,202 @@
+
+// remove duplicates from an unsorted linkedlist
+public void rmDup(LinkedList n){
+	HashSet<Integer> set = new HashSet<Integer>();
+	LinkedList current = n;
+	//if (current == null) return;
+	LinkedList prev = null;
+
+	while (current != null){
+		if (set.contains(current.data) ){
+			// remove it
+			prev.next = current.next;
+		}
+		else{
+			// include it in the set
+			set.add(current.data);
+			prev = current;
+		}
+		current = current.next;
+	}
+}
+
+
+
+// without any other buffer
+public void rmDup2(LinkedList n){
+	// use two linked lists: p1 to iterate, p2 to find duplicates
+	LinkedList p1 = n;
+	if (p1 == null)	return;
+	while (p1 != null){
+		// use p2 to find duplicates
+		int data = p1.data;
+		LinkedList p2 = p1.next;
+		LinkedList prev = p1;
+
+		while (p2 != null){
+			if (p2.data == data){
+				// remove it
+				prev.next = p2.next;
+			}
+			prev = prev.next;
+			p2 = p2.next;
+		}
+		p1 = p1.next;
+	}
+}
+
+
+// find kth to last element
+public Integer findKthToLast(LinkedList n, int k){
+	LinkedList p1 = n;
+	LinkedList p2 = n;
+
+	for (int i = 1; i < k; i ++){
+		if (p2 == null)
+			return null;
+		p2 = p2.next;
+	}
+
+	if (p2 == null) return;
+
+	while (p2.next != null){
+		p1 = p1.next;
+		p2 = p2.next;
+	}
+
+	return p1.data;
+}
+
+// delet middle node
+public void deleteMiddle(Node middle){
+	// middle can't be the last node in the linked list
+	// if (middle == null || middle.next == null)
+	Node n = middle.next;
+	middle.data = n.data;
+	middle.next = n.next;
+}
+
+
+// x
+public LinkedList partition(LinkedList n, int x){
+	LinkedList p1 = n; //  < x
+	LinkedList p2 = n; //  >= x
+	if (n == null) 
+		return p1;
+
+	while(n!=null){
+		LinkedList next = n.next;
+		if (n.data < x){ // goes to p1, add to front
+			n.next = p1;
+			p1 = n;
+		}
+		else{ // goes to p2, append to tail
+			p2.next = n;
+			p2 = n;
+		}
+		n = next;
+	}
+	p2.next = null;
+	return p1;
+}
+
+
+// add two numbers, LinkedList store numbers in reverse order
+public int add1(LinkedList l1, LinkedList l2){
+	int sum = 0;
+	int i = 0;
+	while (l1!=null){
+		sum += l1.data * Math.pow(10,i);
+		l1 = l1.next;
+		i ++;
+	}
+	i = 0;
+	while (l2!=null){
+		sum += l2.data * Math.pow(10,i);
+		l2 = l2.next;
+		i ++;
+	}
+
+	LinkedList result = new LinekdList(new Node(sum % 10));
+	LinkedList copy = result;
+	sum = sum / 10;
+	while (sum !=0 ){
+		copy.next = new Node(sum % 10);
+		sum = sum / 10;
+		copy = copy.next; 
+	}
+	copy.next = null;
+
+	return result;
+
+}
+
+// add two numbers, LinkedList store numbers in forward order
+public LinkedList add2(LinkedList l1, LinkedList l2){
+	int sum1 = 0;
+	while (l1 != null){
+		sum1 *= 10;
+		sum1 += l1.data;
+		l1 = l1.next;
+	}	
+
+	int sum2 = 0;
+	while (l2 != null){
+		sum2 *= 10;
+		sum2 += l2.data;
+		l2 = l2.next;
+	}
+
+	int sum = sum1 + sum2;
+
+	LinkedList result = new LinkedList(new Node(sum % 10)); // result point to null
+	sum = sum / 10;
+
+	while (sum != 0){
+		Node value = new Node(sum % 10);
+		sum = sum/10;
+		value.next = result;
+		result = value;
+	}
+	return result;
+}
+
+
+// check if a linkedlist is a palindrome
+public boolean  isPalindrome(LinkedList l1){
+	LinkedList l2 = new LinkedList(l1.data);
+	LinkedList copy = l1;
+	l1 = l1.next;
+	int length = 0;
+	while (l1 != null){
+		LinkedList value = new LinkedList(l1.data);
+		value.next = l2;
+		l2 = value;
+		l1 = l1.next;
+		length ++;
+	}
+	for (int i = 0; i < length/2; i ++){
+		if (copy.data != l2.data)
+			return false;
+		copy = copy.next;
+		l2 = l2.next;
+	}
+	return true;
+}
+
+// find the beginning node of a linkedlist loop
+public static LinkedList findBegin(LinkedList node){
+	HashSet<Integer> set = new HashSet<Integer>();
+	while(node != null){
+		if (set.contains(node.data))
+			return node;
+		set.add(node.data);
+		node = node.next;
+	}
+	return null; // node loop find
+}
+
+
+
+
+
